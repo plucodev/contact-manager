@@ -16,13 +16,23 @@ export default class Contact extends Component {
     this.setState({ showContactInfo: !this.state.showContactInfo });
   }
   
+  onDeleteClick = () => {
+    this.props.deleteClickHandler();
+  }
+  
   render() {
       const { contact } = this.props
       const { showContactInfo } = this.state
       
       return (
         <div className="card card-body mb-3">
-          <h4>{contact.name} <i onClick={this.onShowClick} className="fas fa-sort-down"></i></h4>
+          <h4>{contact.name} 
+            <i onClick={this.onShowClick} className="fas fa-sort-down ml-3" style={{cursor: 'pointer'}}></i>
+            <i onClick={this.onDeleteClick} className="fas fa-trash-alt float-right text-danger" style={{cursor: 'pointer'}}></i>
+          </h4>
+          
+          
+          
             
             {showContactInfo ? (<ul className="list-group">
               <li className="list-group-item">
@@ -39,6 +49,7 @@ export default class Contact extends Component {
 }
 
 Contact.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  deleteClickHandler: PropTypes.func.isRequired
   
 }
